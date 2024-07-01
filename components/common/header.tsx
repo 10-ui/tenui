@@ -34,29 +34,31 @@ export default function Header() {
           fonts.lineSeedJP.className,
           isScrolled ? "opacity-0" : "opacity-100",
         )}>
-        <Link href='/works' className='relative'>
+        <Link href='/works' className='relative duration-300 hover:scale-125'>
           WORKS
           <span
             className={lc(
               "absolute -top-4 left-1/2 translate-x-[-50%] text-xl text-black/0 duration-500",
               pathname === "/works" && "text-black",
+              "hover:text-black/70",
             )}>
             ・
           </span>
         </Link>
-        <Link href='/about' className='relative'>
+        <Link href='/about' className='relative duration-300 hover:scale-125'>
           ABOUT
           <span
             className={lc(
               "absolute -top-4 left-1/2 translate-x-[-50%] text-xl text-black/0 duration-500",
-              pathname === "/about" && "text-black",
+              pathname === "/about" && "text-blac",
+              "hover:text-black/70",
             )}>
             ・
           </span>
         </Link>
         <Link
           href='https://zenn.dev/10_ui'
-          className='flex items-center gap-1'>
+          className='flex items-center gap-1 duration-300 hover:scale-125 hover:text-black/70'>
           BLOG
           <Icons.rightArrow className='h-3 w-3' />
         </Link>
@@ -66,11 +68,15 @@ export default function Header() {
           "flex items-center gap-1 duration-500",
           isScrolled ? "opacity-0" : "opacity-100",
         )}>
-        <Button size='icon' variant='outline' className='rounded-full'>
-          <Icons.gitHub className='h-4 w-4' />
+        <Button size='icon' variant='outline' className='rounded-full' asChild>
+          <Link href='https://github.com/10-ui'>
+            <Icons.gitHub className='h-4 w-4' />
+          </Link>
         </Button>
-        <Button size='icon' variant='outline' className='rounded-full'>
-          <Icons.mail className='h-4 w-4' />
+        <Button size='icon' variant='outline' className='rounded-full' asChild>
+          <Link href='/contact'>
+            <Icons.mail className='h-4 w-4' />
+          </Link>
         </Button>
       </div>
     </header>
