@@ -22,13 +22,18 @@ export default function TopAnimation() {
     tl.to(
       "#animation_container",
       {
-        x: 300,
+        x: 400,
         opacity: 0,
         duration: 0.5,
         ease: "none",
       },
-      "+=2",
+      "+=1",
     );
+    tl.to("#animation_container", {
+      zIndex: -10,
+      duration: 0.5,
+      ease: "none",
+    });
   }, []);
   return (
     <div
