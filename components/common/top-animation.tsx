@@ -2,11 +2,14 @@
 import { Icons } from "@/components/common/icons";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useState } from "react";
 
 gsap.registerPlugin(useGSAP);
 
 export default function TopAnimation() {
+  const [isAnimationed, setIsAnimationed] = useState(false);
   useGSAP(() => {
+    if (isAnimationed) return;
     const tl = gsap.timeline();
     tl.fromTo(
       "#animation_logo",
@@ -34,6 +37,7 @@ export default function TopAnimation() {
       duration: 0.5,
       ease: "none",
     });
+    setIsAnimationed(true);
   }, []);
   return (
     <div

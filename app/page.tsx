@@ -1,4 +1,3 @@
-import TopAnimation from "@/components/common/top-animation";
 import { Icons } from "@/components/common/icons";
 import { fonts } from "@/utils/fonts";
 import { lc } from "@/utils/tw-lc";
@@ -6,7 +5,6 @@ import { lc } from "@/utils/tw-lc";
 export default function Home() {
   return (
     <>
-      <TopAnimation />
       <main className='flex select-none flex-col'>
         <div
           className={lc(
