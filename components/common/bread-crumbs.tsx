@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -5,34 +7,28 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { usePathname } from "next/navigation";
+import { Fragment } from "react";
 
-export default function BreadCrumbs({
-  pathname,
-}: {
-  pathname: { slug: string[] };
-}) {
-  const path =
-    pathname.slug[0].charAt(0).toUpperCase() + pathname.slug[0].slice(1);
+export default function BreadCrumbs() {
+  const path = usePathname();
+  const pathNames = path.split("/").filter((path) => path);
   return (
     <Breadcrumb className='h-fit px-12'>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href='/'>Home</BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href={`/${pathname.slug}`}>{path}</BreadcrumbLink>
-        </BreadcrumbItem>
-        {pathname.slug.length > 1 && (
-          <>
+        {pathNames.map((pathName, index) => (
+          <Fragment key={index}>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href={`/${pathname.slug[1]}`}>
-                {pathname.slug[1]}
+              <BreadcrumbLink href={`/${pathName}`}>
+                {pathName.charAt(0).toUpperCase() + pathName.slice(1)}
               </BreadcrumbLink>
             </BreadcrumbItem>
-          </>
-        )}
+          </Fragment>
+        ))}
       </BreadcrumbList>
     </Breadcrumb>
   );
