@@ -54,6 +54,12 @@ export default function Header() {
             ・
           </span>
         </Link>
+        <Link
+          href='https://zenn.dev/10_ui'
+          className='flex items-center gap-1'>
+          BLOG
+          <Icons.rightArrow className='h-3 w-3' />
+        </Link>
       </div>
       <div
         className={lc(
