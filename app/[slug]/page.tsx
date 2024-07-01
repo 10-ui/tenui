@@ -1,13 +1,9 @@
-"use client";
-
 import BreadCrumbs from "@/components/common/bread-crumbs";
-import { usePathname } from "next/navigation";
 
-export default function Page() {
-  const pathname = usePathname();
+export default function Page({ params }: { params: { slug: string } }) {
   return (
-    <main className='pt-22 flex min-h-screen select-none rounded-4xl bg-main'>
-      <BreadCrumbs pathname={pathname} />
+    <main className='flex min-h-screen select-none rounded-4xl bg-main pt-22'>
+      <BreadCrumbs pathname={params.slug} />
     </main>
   );
 }

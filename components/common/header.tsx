@@ -23,7 +23,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className='h-22 fixed left-0 top-0 flex w-full items-center justify-between px-10 py-4'>
+    <header className='fixed left-0 top-0 flex h-22 w-full items-center justify-between px-10 py-4'>
       <Link href='/' className='flex items-center gap-2'>
         <Icons.logo className='h-14 w-14' />
         <span className='text-xl font-semibold'>Tenui</span>
