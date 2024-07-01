@@ -1,6 +1,8 @@
+import CoreValue from "@/components/top/corevalue";
 import { Icons } from "@/components/common/icons";
 import { fonts } from "@/utils/fonts";
 import { lc } from "@/utils/tw-lc";
+import Skills from "@/components/top/skills";
 
 export default function Home() {
   return (
@@ -8,7 +10,7 @@ export default function Home() {
       <main className='flex select-none flex-col'>
         <div
           className={lc(
-            "flex min-h-screen flex-row items-center justify-center gap-28 rounded-4xl bg-main",
+            "flex min-h-screen flex-row items-center justify-center gap-28 rounded-3xl bg-main",
             fonts.lineSeedJP.className,
           )}>
           <h2 className='flex flex-col gap-2'>
@@ -17,9 +19,8 @@ export default function Home() {
           </h2>
           <Icons.topImage />
         </div>
-        <div className='flex min-h-screen items-center justify-center rounded-4xl bg-main'>
-          <h2 className='text-2xl font-bold'>トップページ</h2>
-        </div>
+        <CoreValue />
+        <Skills />
       </main>
     </>
   );

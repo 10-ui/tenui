@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { fonts } from "@/utils/fonts";
 import Header from "@/components/common/header";
-import TopAnimation from "@/components/common/top-animation";
+import TopAnimation from "@/components/top/top-animation";
 import { lc } from "@/utils/tw-lc";
 import "./globals.css";
 
@@ -23,7 +23,6 @@ export default function RootLayout({
       <body className={lc(fonts.notoSansJP.className, "bg-gray-500")}>
         <Header />
         <TopAnimation />
-
         {children}
       </body>
     </html>
