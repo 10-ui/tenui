@@ -11,17 +11,11 @@ export default function TopAnimation() {
   useGSAP(() => {
     if (isAnimationed) return;
     const tl = gsap.timeline();
-    tl.fromTo(
-      "#animation_logo",
-      {
-        opacity: 0,
-      },
-      {
-        opacity: 1,
-        duration: 1.5,
-        ease: "none",
-      },
-    );
+    tl.to("#animation_logo", {
+      opacity: 1,
+      duration: 1.5,
+      ease: "none",
+    });
     tl.to(
       "#animation_container",
       {
@@ -43,7 +37,7 @@ export default function TopAnimation() {
     <div
       className='fixed inset-0 flex items-center justify-center bg-main'
       id='animation_container'>
-      <Icons.logo className='h-40 w-40' id='animation_logo' />
+      <Icons.logo className='h-40 w-40 opacity-0' id='animation_logo' />
     </div>
   );
 }
