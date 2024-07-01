@@ -3,14 +3,24 @@ import { Icons } from "@/components/common/icons";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useState } from "react";
+import { lc } from "@/utils/tw-lc";
 
 gsap.registerPlugin(useGSAP);
 
 export default function TopAnimation() {
-  const [isAnimationed, setIsAnimationed] = useState(false);
+  const [isAnimated, setIsAnimated] = useState(false);
   useGSAP(() => {
-    if (isAnimationed) return;
-    const tl = gsap.timeline();
+    if (sessionStorage.getItem("state") === "true") {
+      setIsAnimated(true);
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        sessionStorage.setItem("state", "true");
+      },
+    });
+
     tl.to("#animation_logo", {
       opacity: 1,
       duration: 1.5,
@@ -31,11 +41,19 @@ export default function TopAnimation() {
       duration: 0.5,
       ease: "none",
     });
-    setIsAnimationed(true);
+    tl.to("#animation_container", {
+      display: "none",
+      duration: 0,
+      ease: "none",
+    });
   }, []);
+
   return (
     <div
-      className='fixed inset-0 flex items-center justify-center bg-main'
+      className={lc(
+        "fixed inset-0 flex items-center justify-center bg-main",
+        isAnimated ? "hidden" : "flex",
+      )}
       id='animation_container'>
       <Icons.logo className='h-40 w-40 opacity-0' id='animation_logo' />
     </div>
