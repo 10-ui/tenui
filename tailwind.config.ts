@@ -39,7 +39,7 @@ const config = {
     extend: {
       spacing: {
         4.5: "1.125rem",
-        22: "5.5rem",
+        29: "7.25rem",
       },
       colors: {
         main: "var(--main-color)",
