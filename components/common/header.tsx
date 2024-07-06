@@ -9,6 +9,12 @@ import { Icons } from "@/components/common/icons";
 import { usePathname } from "next/navigation";
 
 import BreadCrumbs from "@/components/common/bread-crumbs";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function Header() {
   const path = usePathname();
@@ -72,33 +78,56 @@ export default function Header() {
             "flex items-center gap-1 duration-500",
             isScrolled ? "opacity-0" : "opacity-100",
           )}>
-          <Button
-            size='icon'
-            variant='outline'
-            className='rounded-full'
-            asChild>
-            <Link href='/admin/u/login'>
-              <Icons.account className='h-5 w-5' />
-            </Link>
-          </Button>
-          <Button
-            size='icon'
-            variant='outline'
-            className='rounded-full'
-            asChild>
-            <Link href='https://github.com/10-ui'>
-              <Icons.gitHub className='h-4 w-4' />
-            </Link>
-          </Button>
-          <Button
-            size='icon'
-            variant='outline'
-            className='rounded-full'
-            asChild>
-            <Link href='/contact'>
-              <Icons.mail className='h-4 w-4' />
-            </Link>
-          </Button>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  size='icon'
+                  variant='outline'
+                  className='rounded-full'
+                  asChild>
+                  <Link href='/admin/u/login'>
+                    <Icons.account className='h-5 w-5' />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>管理者ページへ</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  size='icon'
+                  variant='outline'
+                  className='rounded-full'
+                  asChild>
+                  <Link href='https://github.com/10-ui'>
+                    <Icons.gitHub className='h-4 w-4' />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>GitHub</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  size='icon'
+                  variant='outline'
+                  className='rounded-full'
+                  asChild>
+                  <Link href='/contact'>
+                    <Icons.mail className='h-4 w-4' />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>お問い合わせ</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </div>
       <BreadCrumbs pathNames={pathNames} />

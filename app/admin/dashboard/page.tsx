@@ -33,7 +33,7 @@ interface View {
 export default function Dashboard() {
   const router = useRouter();
   const [currentUser, setCurrentUser] = useState<string>("");
-  const [views, setViews] = useState<View[]>([]); // View 型の配列として初期化
+  const [views, setViews] = useState<View[]>([]);
 
   const getCurrentUser = async () => {
     try {
@@ -54,7 +54,7 @@ export default function Dashboard() {
         }
       }
     } catch (err: any) {
-      console.error("getCurrentUser error:", err.message); // エラーメッセージの詳細化
+      console.error("getCurrentUser error:", err.message);
     }
   };
 
@@ -64,9 +64,9 @@ export default function Dashboard() {
       if (!fetchedViews)
         throw new Error("fetchViews returned null or undefined");
 
-      setViews(fetchedViews); // ソートはfetchViews関数内で行われているため、ここでのソートは不要
+      setViews(fetchedViews);
     } catch (err: any) {
-      console.error("loadViews error:", err.message); // エラーメッセージの詳細化
+      console.error("loadViews error:", err.message);
     }
   };
 
