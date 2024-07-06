@@ -26,7 +26,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className='h-29 fixed left-0 top-0 flex w-full flex-col gap-2 px-10 py-4'>
+    <header className='fixed left-0 top-0 flex h-29 w-full flex-col gap-2 px-10 py-4'>
       <div className='flex items-center justify-between'>
         <Link href='/' className='flex items-center gap-2'>
           <Icons.logo className='h-10 w-10' />
@@ -72,6 +72,15 @@ export default function Header() {
             "flex items-center gap-1 duration-500",
             isScrolled ? "opacity-0" : "opacity-100",
           )}>
+          <Button
+            size='icon'
+            variant='outline'
+            className='rounded-full'
+            asChild>
+            <Link href='/admin/u/login'>
+              <Icons.account className='h-5 w-5' />
+            </Link>
+          </Button>
           <Button
             size='icon'
             variant='outline'

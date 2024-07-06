@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { fonts } from "@/utils/fonts";
-import Header from "@/components/common/header";
-import TopAnimation from "@/components/top/top-animation";
 import logo from "@/public/logo.png";
+import { fonts } from "@/utils/fonts";
 import { lc } from "@/utils/tw-lc";
-import "./globals.css";
+import "@/styles/globals.css";
 
 export const metadata: Metadata = {
   title: {
@@ -29,9 +27,7 @@ export default function RootLayout({
   return (
     <html lang='ja'>
       <body className={lc(fonts.notoSansJP.className, "bg-gray-500")}>
-        <Header />
-        <TopAnimation />
-        {children}
+        <main className='flex select-none flex-col'>{children}</main>
       </body>
     </html>
   );

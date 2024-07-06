@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { sendView } from "@/utils/datafetch";
 
 const contactSchema = z.object({
   name: z.string().min(1, { message: "名前を入力してください" }),
@@ -23,11 +25,13 @@ const contactSchema = z.object({
   message: z.string().min(1, { message: "メッセージを入力してください" }),
 });
 
-const onSubmit = (data: z.infer<typeof contactSchema>) => {
-  console.log(data);
-};
-
 export default function ContactForm() {
+  const [message, setMessage] = useState("");
+  const onSubmit = (data: z.infer<typeof contactSchema>) => {
+    sendView({ data });
+    setMessage("送信しました!ご意見ありがとうございました!");
+    console.log(data);
+  };
   const form = useForm<z.infer<typeof contactSchema>>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -97,6 +101,7 @@ export default function ContactForm() {
         <Button type='submit' className='w-full'>
           送信
         </Button>
+        {message && <p className='px-4 py-2 text-green-500'>{message}</p>}
       </form>
     </Form>
   );
