@@ -61,7 +61,7 @@ export default function Login() {
               name='email'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Email(23aw0119@jec.ac.jp)</FormLabel>
                   <FormControl>
                     <Input {...field} className='w-full' />
                   </FormControl>
@@ -74,7 +74,7 @@ export default function Login() {
               name='password'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Password(pAssword)</FormLabel>
                   <FormControl>
                     <Input type='password' {...field} />
                   </FormControl>
@@ -93,7 +93,7 @@ export default function Login() {
         <div className='space-y-4'>
           <div className='flex w-full justify-center'>
             <Button className='w-3/5' variant='outline' asChild>
-              <Link href='/admin/u/reset'>パスワードを忘れた方</Link>
+              <Link href='/admin/u/reset-request'>パスワードを忘れた方</Link>
             </Button>
           </div>
           <div className='flex w-full justify-center'>
