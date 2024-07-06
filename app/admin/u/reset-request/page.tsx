@@ -24,11 +24,11 @@ const resetRequestSchema = z.object({
     .email({ message: "有効なメールアドレスを入力してください" }),
 });
 export default function ResetRequest() {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<[string, boolean]>(["", false]);
   const onSubmit = async (
     resetRequestData: z.infer<typeof resetRequestSchema>,
   ) => {
-    setMessage("");
+    setMessage(["", false]);
     const { data, error } = await supabase.auth.resetPasswordForEmail(
       resetRequestData.email,
       {
@@ -37,10 +37,10 @@ export default function ResetRequest() {
       },
     );
     if (error) {
-      setMessage(error.message);
+      setMessage([error.message, false]);
       throw new Error(error.message);
     }
-
+    setMessage(["パスワード再設定メールを送信しました", true]);
     console.log(data);
   };
   const form = useForm<z.infer<typeof resetRequestSchema>>({
@@ -51,7 +51,11 @@ export default function ResetRequest() {
   });
   return (
     <div className='flex min-h-screen flex-1 flex-col items-center justify-center rounded-3xl bg-main p-24'>
-      {message && <p className='text-red-500'>{message}</p>}
+      {message[0] && (
+        <p className={`${message[1] ? "text-green-500" : "text-red-500"}`}>
+          {message[0]}
+        </p>
+      )}
       <div className='w-2/5'>
         <Form {...form}>
           <h3 className='mb-4 text-xl font-medium'>

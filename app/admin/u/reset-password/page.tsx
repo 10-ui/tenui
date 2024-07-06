@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabase";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,8 +16,6 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
 
 const resetPasswordSchema = z.object({
   password: z
@@ -25,6 +24,7 @@ const resetPasswordSchema = z.object({
 });
 export default function ResetPassword() {
   const [message, setMessage] = useState("");
+  const router = useRouter();
   const onSubmit = async (
     resetPasswordData: z.infer<typeof resetPasswordSchema>,
   ) => {
@@ -36,7 +36,7 @@ export default function ResetPassword() {
       setMessage(error.message);
       throw new Error(error.message);
     }
-
+    router.push(process.env.NEXT_PUBLIC_BASE_URL + "/admin/u/login");
     console.log(data);
   };
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
