@@ -1,7 +1,26 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabase";
 import { fetchViews } from "@/utils/datafetch";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Link from "next/link";
 
 interface View {
   id: number;
@@ -12,6 +31,7 @@ interface View {
 }
 
 export default function Dashboard() {
+  const router = useRouter();
   const [currentUser, setCurrentUser] = useState<string>("");
   const [views, setViews] = useState<View[]>([]); // View 型の配列として初期化
 
@@ -63,19 +83,48 @@ export default function Dashboard() {
         </div>
       ) : (
         <>
-          <div></div>
+          <div className='mb-10 flex items-center justify-between gap-2'>
+            <h2 className='text-4xl font-bold'>Dashboard</h2>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar>
+                  <AvatarImage src='' />
+                  <AvatarFallback>{currentUser.slice(0, 2)}</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>Logged in as</DropdownMenuLabel>
+                <DropdownMenuLabel> {currentUser}</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={() => {
+                    supabase.auth.signOut();
+                    router.push("/");
+                  }}>
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
           <div suppressHydrationWarning={true} className='flex flex-col'>
-            {currentUser} でログインしています。
-            <ul>
-              {views.map((view) => (
-                <li key={view.id}>
-                  <strong>{view.message}</strong> (
-                  {new Date(view.created_at).toLocaleString()})
-                  <br />
-                  {view.name} ({view.email})
-                </li>
-              ))}
-            </ul>
+            {views.map((view) => (
+              <Card key={view.id}>
+                <CardHeader>
+                  <CardTitle>{view.message.slice(0, 10)}</CardTitle>
+                  <CardDescription>
+                    {new Date(view.created_at).toLocaleString()}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p>{view.message}</p>
+                </CardContent>
+                <CardFooter>
+                  <p>
+                    <Link href={`mailto:${view.email}`}>{view.name}様</Link>
+                  </p>
+                </CardFooter>
+              </Card>
+            ))}
           </div>
         </>
       )}
